@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: spring-batch
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC&characterEncoding=UTF-8
+      username: testuser
+      password: 1234
+  aop:
+    auto: false
+  batch:
+    jdbc:
+      initialize-schema: never
+
+spring.batch.job.name: FLAT_FILE_CHUNK_JOB
+logging:
+  level:
+    org.springframework.batch: DEBUG
+    com.schooldevops.spring_batch: DEBUG
+
+    org:
+      springframework:
+        boot:
+          autoconfigure: INFO
