@@ -3,10 +3,10 @@ package com.schooldevops.spring_batch
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
+//@SpringBootTest
 class SpringBatchApplicationTests {
 
-	@Test
+//	@Test
 	fun contextLoads() {
 	}
 

@@ -12,6 +12,7 @@ import org.springframework.batch.item.file.FlatFileItemReader
 import org.springframework.batch.item.file.FlatFileItemWriter
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
@@ -19,6 +20,7 @@ import org.springframework.core.io.FileSystemResource
 import org.springframework.transaction.PlatformTransactionManager
 
 @Configuration
+@ConditionalOnProperty(name = ["spring.batch.job.name"], havingValue = "FLAT_FILE_CHUNK_JOB")
 class FlatFileItemJobConfig {
     private val log: Logger = LoggerFactory.getLogger(FlatFileItemJobConfig::class.java)
 

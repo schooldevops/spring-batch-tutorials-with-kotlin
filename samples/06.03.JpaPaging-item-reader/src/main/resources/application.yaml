@@ -13,7 +13,19 @@ spring:
     jdbc:
       initialize-schema: never
 
-spring.batch.job.name: FLAT_FILE_CHUNK_JOB
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: always  # 항상 SQL 초기화 실행
+      continue-on-error: true  # 오류 발생 시 계속 진행
+
+spring.batch.job.name: JPA_CHUNK_JOB
 logging:
   level:
     org.springframework.batch: DEBUG
