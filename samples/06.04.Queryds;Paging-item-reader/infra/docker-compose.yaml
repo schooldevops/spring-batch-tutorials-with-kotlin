@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql-ramos
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: 1234
+      TZ: Asia/Seoul
+    ports:
+      - 3306:3306
+    volumes:
+      - ./init.sql:/data/application/init.sql
+      - ./db_data/data:/var/lib/mysql
+    command: --init-file /data/application/init.sql
