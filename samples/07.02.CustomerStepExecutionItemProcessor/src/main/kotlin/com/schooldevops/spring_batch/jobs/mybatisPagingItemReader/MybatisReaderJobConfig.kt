@@ -12,7 +12,6 @@ import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.launch.support.RunIdIncrementer
 import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.builder.StepBuilder
-import org.springframework.batch.core.step.tasklet.TaskletStep
 import org.springframework.batch.item.file.FlatFileItemWriter
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder
 import org.springframework.batch.item.support.CompositeItemProcessor
@@ -44,9 +43,6 @@ class MybatisReaderJobConfig {
     @Autowired
     var sqlSessionFactory: SqlSessionFactory? = null
 
-    @Autowired
-    lateinit var customerStepExecutionItemProcessor: CustomerStepExecutionItemProcessor
-
     @Bean
     @Throws(Exception::class)
     fun myBatisItemReader(): MyBatisPagingItemReader<Customer2> {
@@ -69,15 +65,31 @@ class MybatisReaderJobConfig {
             .build()
     }
 
+    /**
+     * compositeItemProcessor을 이용하여 2개의 ItemProcessor을 List로 엮어 처리한다.
+     */
+    @Bean
+    fun compositeItemProcessor() : CompositeItemProcessor<Customer2, Customer2> {
+        return CompositeItemProcessorBuilder<Customer2, Customer2>()
+            .delegates(
+                List.of(
+                    LowerCaseItemProcessor(),
+                    After20YearsItemProcessor()
+                )
+            )
+            .build()
+    }
+
+
     @Bean
     @Throws(Exception::class)
-    fun customerJdbcCursorStep(jobRepository: JobRepository, transactionManager: PlatformTransactionManager): TaskletStep? {
+    fun customerJdbcCursorStep(jobRepository: JobRepository, transactionManager: PlatformTransactionManager): Step {
         log.info("------------------ Init customerJdbcCursorStep -----------------")
 
         return StepBuilder("customerJdbcCursorStep", jobRepository)
             .chunk<Customer2, Customer2>(CHUNK_SIZE, transactionManager)
             .reader(myBatisItemReader())
-            .processor(customerStepExecutionItemProcessor)
+            .processor(compositeItemProcessor())
             .writer(customerCursorFlatFileItemWriter())
             .build()
     }

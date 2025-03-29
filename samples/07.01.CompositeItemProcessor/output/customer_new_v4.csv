@@ -1,6 +1,6 @@
-kido	30	female
-kido2	32	female
-captain	35	male
-no	60	female
-body	70	male
-know	90	female
+kido_(MYBATIS_PAGING_JOB, 34)	10	FEMALE
+kido2_(MYBATIS_PAGING_JOB, 34)	12	FEMALE
+captain_(MYBATIS_PAGING_JOB, 34)	15	MALE
+no_(MYBATIS_PAGING_JOB, 34)	40	FEMALE
+body_(MYBATIS_PAGING_JOB, 34)	50	MALE
+know_(MYBATIS_PAGING_JOB, 34)	70	FEMALE
