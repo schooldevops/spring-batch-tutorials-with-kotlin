@@ -26,7 +26,6 @@ dependencies {
 	implementation("com.zaxxer:HikariCP:6.2.1")
 
 	implementation("ch.qos.logback:logback-classic:1.5.16")
-	implementation("com.mysql:mysql-connector-j:8.3.0")
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3")
 	implementation("org.mybatis:mybatis:3.5.13")
 	implementation("org.mybatis:mybatis-spring:2.1.0")

@@ -3,7 +3,8 @@ spring:
     name: spring-batch
   datasource:
     hikari:
-      maximum-pool-size: 10
+      minimum-idle: 10
+      maximum-pool-size: 15
       driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC&characterEncoding=UTF-8
       username: testuser

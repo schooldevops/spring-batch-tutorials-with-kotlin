@@ -15,7 +15,7 @@
     <select id="selectCustomers" resultMap="customerResult">
         SELECT id, name, age, gender
         FROM customer
-                 LIMIT #{_skiprows}, #{_pagesize}
+        LIMIT #{_skiprows}, #{_pagesize}
     </select>
 
     <select id="selectCursorCustomers" resultMap="customerResult" fetchSize="2">
